@@ -2,6 +2,8 @@ package com.registrationservice;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class RegistrationController {
 	@Autowired
 	private RegistrationService registrationservice;
 	
+	Logger logger=LoggerFactory.getLogger(RegistrationController.class);
+
 	
 	@PostMapping("/createregistrationdata")
 	public String createRegistrationdata(@RequestBody RegistrationDTO registrationdto) {
@@ -32,7 +36,9 @@ public class RegistrationController {
 	
 	@GetMapping("/getAllregistrationdata")
 	public List<Registration> getAllRegistrationData(){
+		logger.info("Beginning of getAllRegistrationData method");
 		List<Registration> listobj = this.registrationservice.getAllRegistrationData();
+		logger.info("End of  getAllRegistrationData method");
 		return listobj;
 	}
 	
@@ -45,7 +51,9 @@ public class RegistrationController {
 	
 	@GetMapping("/servicetype/{registrationservicename}")
 	public List<Registration> getVehicleRegistration(@PathVariable String registrationservicename){
+		logger.info("Beginning of getVehicleRegistration method");
 		List<Registration> listobj = this.registrationservice.getVehicleRegistration(registrationservicename);
+		logger.info("Beginning of getVehicleRegistration method");
 		return listobj;
 	}
 
